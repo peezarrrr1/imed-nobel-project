@@ -1,32 +1,32 @@
 import React, { useRef, useState } from 'react'
 import { Select } from 'antd';
-import { Button, Space } from 'antd';
+import { Button} from 'antd';
 import axios from 'axios'
 
 
-function Filters() {
+function Filters(props) {
 
   const [currentyear, setCurrentYear] = useState(new Date().getFullYear());
   let years = [];
     for(let i = new Date().getFullYear();i >= 1901;i--){
       years.push(i);
+      
     }
     
   let awardYearSorted = years.map((result,index)=>{
     return { value: result , label : result}
   })
-
+ 
   // const [yearSelect, take] = useState([]);
   const getData = async (currentyear) =>{
-    const response = await axios.get('https://api.nobelprize.org/2.1/nobelPrizes')
+    const response = await axios.get(`https://api.nobelprize.org/2.1/nobelPrizes?nobelPrizeYear=${currentyear}`)
     
-    // take(response.data.nobelPrizes);
-   const fileterData = response.data.nobelPrizes;
-   const nobleprizeByyear = fileterData.filter((y) => y.awardYear === currentyear.toString());
-   console.log(nobleprizeByyear);
-
+   props.setDetailList(response.data.nobelPrizes);
+   
+   props.setYear(currentyear);
   }
- 
+  
+
   
   
  
