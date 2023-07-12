@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Table } from "antd";
 
 function Details(props) {
-  console.log(props.nobelPrizeDetailList);
-
   const columns = [
     {
       title: "ชื่อรางวัล",
@@ -28,18 +26,6 @@ function Details(props) {
   ];
   let data = [];
 
-  //   data = [
-  //     props.nobelPrizeDetailList.map((nobelPrizeDetail) => {
-  //       return(
-  //         {
-  //         awardName: nobelPrizeDetail.category.en,
-  //         awardYear: nobelPrizeDetail.awardYear,
-  //         laureates: nobelPrizeDetail.awardYear,
-  //         motivation: nobelPrizeDetail.category.en,
-  //         }
-  //       )
-  //     })
-  //  ,]
   data = props.nobelPrizeDetailList.flatMap((nobel, index) => {
     const { categoryFullName, awardYear } = nobel;
     if (nobel.laureates === undefined)
@@ -59,11 +45,10 @@ function Details(props) {
         motivation: authorNobel.motivation.en,
       }));
   });
-  console.log(data);
 
   return (
-    <div className="p-5">
-      <div className="bg-gray-300 w-screen h-screen text-3xl">
+    <div className="p-5 w-4/5">
+      <div className="bg-gray-300 h-screen text-3xl">
         Details
         <Table columns={columns} dataSource={data} />
       </div>

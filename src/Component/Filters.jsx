@@ -15,7 +15,6 @@ function Filters(props) {
     return { value: result, label: result };
   });
 
-  // const [yearSelect, take] = useState([]);
   const getData = async (currentyear) => {
     const response = await axios.get(
       `https://api.nobelprize.org/2.1/nobelPrizes?nobelPrizeYear=${currentyear}`
@@ -28,8 +27,6 @@ function Filters(props) {
     props.setYear(currentyear);
     setsum(sum);
   };
-
-  // let sum = prizeCollect.reduce((prev, curr) => prev + curr, 0);
 
   return (
     <div className="p-5">
