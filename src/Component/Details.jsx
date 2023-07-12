@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Space, Table, Tag } from "antd";
+import { Table } from "antd";
 
 function Details(props) {
   console.log(props.nobelPrizeDetailList);
@@ -27,38 +27,38 @@ function Details(props) {
     },
   ];
   let data = [];
- 
 
-//   data = [
-//     props.nobelPrizeDetailList.map((nobelPrizeDetail) => {
-//       return(
-//         {
-//         awardName: nobelPrizeDetail.category.en,
-//         awardYear: nobelPrizeDetail.awardYear,
-//         laureates: nobelPrizeDetail.awardYear,
-//         motivation: nobelPrizeDetail.category.en,
-//         }
-//       )
-//     })
-//  ,]
-
-  props.nobelPrizeDetailList.map((nobelPrizeDetail, index) => {
-     return (data = [
-      {
-        key:index,
-        awardName: nobelPrizeDetail.category.en,
-        awardYear: nobelPrizeDetail.awardYear,
-        laureates: nobelPrizeDetail.awardYear,
-        motivation: nobelPrizeDetail.category.en,
-      },
-   
-   
-     
-     ]
-    
-    )
-  })
-
+  //   data = [
+  //     props.nobelPrizeDetailList.map((nobelPrizeDetail) => {
+  //       return(
+  //         {
+  //         awardName: nobelPrizeDetail.category.en,
+  //         awardYear: nobelPrizeDetail.awardYear,
+  //         laureates: nobelPrizeDetail.awardYear,
+  //         motivation: nobelPrizeDetail.category.en,
+  //         }
+  //       )
+  //     })
+  //  ,]
+  data = props.nobelPrizeDetailList.flatMap((nobel, index) => {
+    const { categoryFullName, awardYear } = nobel;
+    if (nobel.laureates === undefined)
+      return {
+        index: index + 1,
+        awardName: categoryFullName.en,
+        awardYear: awardYear,
+        laureates: " - ",
+        motivation: nobel.topMotivation?.en,
+      };
+    else
+      return nobel.laureates.map((authorNobel) => ({
+        index: index + 1,
+        awardName: categoryFullName.en,
+        awardYear: awardYear,
+        laureates: authorNobel.knownName?.en || authorNobel.orgName?.en,
+        motivation: authorNobel.motivation.en,
+      }));
+  });
   console.log(data);
 
   return (

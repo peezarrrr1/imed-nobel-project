@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Select } from "antd";
 import { Button } from "antd";
 import axios from "axios";
@@ -35,6 +35,7 @@ function Filters(props) {
     <div className="p-5">
       <div className="bg-blue-400 w-96 h-screen flex justify-center items-center">
         <Select
+          showSearch
           defaultValue={currentyear}
           style={{
             width: 120,
