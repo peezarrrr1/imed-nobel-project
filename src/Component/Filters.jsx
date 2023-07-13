@@ -43,6 +43,7 @@ function Filters(props) {
         <Button className="bg-green-500" onClick={() => getData(currentyear)}>
           Apply
         </Button>
+
         <div>Prize Amount {sumAmount}</div>
       </div>
     </div>
